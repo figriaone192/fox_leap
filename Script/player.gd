@@ -107,3 +107,5 @@ func _update_camera_room(force: bool = false) -> void:
 
 func _move_camera() -> void:
 	camera.global_position = target_camera_pos
+	
+tambah 
