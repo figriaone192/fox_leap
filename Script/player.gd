@@ -6,6 +6,7 @@ const MAX_JUMP_VELOCITY: float = -1000.0
 const MIN_JUMP_VELOCITY: float = -150.0
 const CHARGE_TIME: float = 1.0
 const JUMP_HORIZONTAL_FORCE: float = 250.0
+const WALL_KNOCKBACK_FORCE: float = 200.0  # Knockback saat tabrak dinding
 
 # Camera grid control
 const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
@@ -56,7 +57,7 @@ func _physics_process(delta: float) -> void:
 
 			# Tambahan dorongan horizontal saat lompat
 			if direction == 0:
-				velocity.x = facing_direction * (JUMP_HORIZONTAL_FORCE * 1.5)  # loncat ke arah hadap
+				velocity.x = facing_direction * (JUMP_HORIZONTAL_FORCE * 1.5)
 			else:
 				velocity.x = direction * JUMP_HORIZONTAL_FORCE
 
@@ -69,7 +70,7 @@ func _physics_process(delta: float) -> void:
 		jump_charge_time = 0.0
 		is_charging_jump = false
 
-	# Gerak horizontal
+	# Gerak horizontal saat di tanah
 	if is_on_floor() and not is_charging_jump:
 		if direction != 0:
 			velocity.x = direction * SPEED
@@ -77,6 +78,19 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+	# Knockback saat menabrak dinding ketika lompat
+	if not is_on_floor():
+		for i in range(get_slide_collision_count()):
+			var collision := get_slide_collision(i)
+			if collision != null:
+				var normal = collision.get_normal()
+				if abs(normal.x) > 0.9:
+					# Knockback horizontal
+					velocity.x = normal.x * WALL_KNOCKBACK_FORCE
+					# Kurangi pantulan vertikal (hanya setengah)
+					velocity.y *= 0.9
+
 
 	# Animasi
 	if not is_on_floor():
@@ -107,5 +121,3 @@ func _update_camera_room(force: bool = false) -> void:
 
 func _move_camera() -> void:
 	camera.global_position = target_camera_pos
-	
-tambah 
