@@ -6,7 +6,7 @@ const MAX_JUMP_VELOCITY: float = -1000.0
 const MIN_JUMP_VELOCITY: float = -150.0
 const CHARGE_TIME: float = 1.0
 const JUMP_HORIZONTAL_FORCE: float = 250.0
-const WALL_KNOCKBACK_FORCE: float = 200.0  # Knockback saat tabrak dinding
+const WALL_KNOCKBACK_FORCE: float = 200.0
 
 # Camera grid control
 const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
@@ -14,10 +14,18 @@ const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 
+# UI labels (ganti path jika perlu)
+@onready var jump_label: Label = get_tree().get_root().get_node("Game/UI Layer/label_jump")
+@onready var time_label: Label = get_tree().get_root().get_node("Game/UI Layer/timestamp")
+
 # State variables
 var jump_charge_time: float = 0.0
 var is_charging_jump: bool = false
-var facing_direction: int = 1  # 1 = kanan, -1 = kiri
+var facing_direction: int = 1
+
+var jump_count: int = 0
+var has_started_timer: bool = false
+var time_since_first_jump: float = 0.0
 
 # Kamera ruangan
 var current_room: Vector2 = Vector2.ZERO
@@ -26,6 +34,8 @@ var target_camera_pos: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	camera.make_current()
 	_update_camera_room(true)
+	jump_label.text = "TOTAL JUMP: 0"
+	time_label.text = "TIME: 00:00.0"
 
 func _physics_process(delta: float) -> void:
 	# Tambah gravitasi
@@ -55,11 +65,17 @@ func _physics_process(delta: float) -> void:
 			var charge_ratio: float = jump_charge_time / CHARGE_TIME
 			velocity.y = lerp(MIN_JUMP_VELOCITY, MAX_JUMP_VELOCITY, charge_ratio)
 
-			# Tambahan dorongan horizontal saat lompat
 			if direction == 0:
 				velocity.x = facing_direction * (JUMP_HORIZONTAL_FORCE * 1.5)
 			else:
 				velocity.x = direction * JUMP_HORIZONTAL_FORCE
+
+			# Hitung lompatan dan mulai timer
+			jump_count += 1
+			jump_label.text = "TOTAL JUMP: " + str(jump_count)
+
+			if not has_started_timer:
+				has_started_timer = true
 
 			jump_charge_time = 0.0
 			is_charging_jump = false
@@ -79,18 +95,27 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# Knockback saat menabrak dinding ketika lompat
+	# Timer jalan terus setelah lompat pertama
+	if has_started_timer:
+		time_since_first_jump += delta
+
+		# Format waktu MM:SS.ss
+		var minutes = int(time_since_first_jump) / 60
+		var seconds = int(time_since_first_jump) % 60
+		var centiseconds = int((time_since_first_jump - int(time_since_first_jump)) * 100)
+
+		time_label.text = "TIME: %02d:%02d.%02d" % [minutes, seconds, centiseconds]
+
+		
+	# Knockback saat tabrak dinding
 	if not is_on_floor():
 		for i in range(get_slide_collision_count()):
 			var collision := get_slide_collision(i)
 			if collision != null:
 				var normal = collision.get_normal()
 				if abs(normal.x) > 0.9:
-					# Knockback horizontal
 					velocity.x = normal.x * WALL_KNOCKBACK_FORCE
-					# Kurangi pantulan vertikal (hanya setengah)
 					velocity.y *= 0.9
-
 
 	# Animasi
 	if not is_on_floor():
@@ -113,9 +138,7 @@ func _update_camera_room(force: bool = false) -> void:
 		floor(player_pos.y / ROOM_SIZE.y)
 	)
 
-	var room_changed: bool = (new_room != current_room)
-
-	if force or room_changed:
+	if force or (new_room != current_room):
 		current_room = new_room
 		target_camera_pos = current_room * ROOM_SIZE + ROOM_SIZE / 2.0
 
