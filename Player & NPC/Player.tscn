@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cmxm4s8c31qi6"]
+[gd_scene load_steps=19 format=3 uid="uid://cmxm4s8c31qi6"]
 
 [ext_resource type="Script" uid="uid://dp1k7q4tubrqj" path="res://Script/player.gd" id="1_3eeal"]
 [ext_resource type="Texture2D" uid="uid://xkodna8j6tyy" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="1_p4wyn"]
@@ -120,8 +120,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1cbvn"]
-radius = 6.08276
+[sub_resource type="CircleShape2D" id="CircleShape2D_xdgnv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6saqk"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3eeal")
@@ -131,7 +132,14 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_4bmis")
 animation = &"Idle"
 autoplay = "Idle"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -6)
-shape = SubResource("CircleShape2D_1cbvn")
+position = Vector2(-1.32, -5.665)
+scale = Vector2(0.56, 0.56)
+shape = SubResource("CircleShape2D_xdgnv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(1, -12.44)
+scale = Vector2(0.655, 0.655)
+shape = SubResource("CircleShape2D_6saqk")

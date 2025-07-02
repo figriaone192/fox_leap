@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Movement constants
 const SPEED: float = 250.0
-const MAX_JUMP_VELOCITY: float = -1000.0
+const MAX_JUMP_VELOCITY: float = -900.0
 const MIN_JUMP_VELOCITY: float = -150.0
 const CHARGE_TIME: float = 1.0
 const JUMP_HORIZONTAL_FORCE: float = 250.0
