@@ -1,0 +1,156 @@
+[gd_scene load_steps=11 format=3 uid="uid://ifjpihxui1uj"]
+
+[ext_resource type="Script" uid="uid://oxh0pr8ar0nd" path="res://Script/main_menu.gd" id="1_ftydy"]
+[ext_resource type="Texture2D" uid="uid://56o3imu7t87g" path="res://Assets/Tiles/Floor 1/background.png" id="2_hii65"]
+[ext_resource type="Texture2D" uid="uid://8kgg78ao6j6n" path="res://Assets/Tiles/Floor 1/middleground.png" id="3_kqsxi"]
+[ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="4_kqsxi"]
+
+[sub_resource type="Animation" id="Animation_hptlk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1001, 390)]
+}
+
+[sub_resource type="Animation" id="Animation_pvidh"]
+resource_name = "judul_ani"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(973, 387), Vector2(973, 391.605), Vector2(973, 387)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oqads"]
+_data = {
+&"RESET": SubResource("Animation_hptlk"),
+&"judul_ani": SubResource("Animation_pvidh")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06t4h"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ftydy")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(989, 426)
+scale = Vector2(10.7917, 10.7917)
+texture = ExtResource("2_hii65")
+metadata/_edit_lock_ = true
+
+[node name="Middleground" type="Sprite2D" parent="."]
+position = Vector2(975, 564)
+scale = Vector2(5.425, 5.425)
+texture = ExtResource("3_kqsxi")
+metadata/_edit_lock_ = true
+
+[node name="224496Fe-6088-490c-95Bc-275Ae3200e5aRemovalaiPreview" type="Sprite2D" parent="."]
+position = Vector2(1001, 390)
+scale = Vector2(1.66333, 1.66333)
+texture = ExtResource("4_kqsxi")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="224496Fe-6088-490c-95Bc-275Ae3200e5aRemovalaiPreview"]
+libraries = {
+&"": SubResource("AnimationLibrary_oqads")
+}
+autoplay = "judul_ani"
+
+[node name="Setting" type="CanvasLayer" parent="."]
+
+[node name="HSlider" type="HSlider" parent="Setting"]
+offset_left = 515.0
+offset_top = 736.0
+offset_right = 1120.0
+offset_bottom = 761.0
+scale = Vector2(1.585, 2.435)
+
+[node name="Button" type="Button" parent="Setting/HSlider"]
+layout_mode = 0
+offset_left = 617.035
+offset_top = -4.10679
+offset_right = 673.035
+offset_bottom = 24.8932
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = 125.0
+offset_right = 205.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.015, 1.015)
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Quit"
