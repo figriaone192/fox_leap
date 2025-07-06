@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://l6cepqxapfr8"]
+[gd_scene load_steps=10 format=3 uid="uid://l6cepqxapfr8"]
 
 [ext_resource type="Script" uid="uid://bvlg5drbmcmfy" path="res://Script/pause_menu.gd" id="1_u4cqy"]
+[ext_resource type="FontFile" uid="uid://u1vo6uxfqqis" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="2_52pyj"]
 [ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="2_ur6gg"]
+[ext_resource type="AudioStream" uid="uid://dcc3xcaqtv5m7" path="res://Assets/Sound/click_btn.wav" id="3_msjnk"]
+[ext_resource type="AudioStream" uid="uid://c24prwpabufi0" path="res://Assets/Sound/hover_btn.wav" id="4_48vd4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3got"]
 bg_color = Color(0.169245, 0.169245, 0.169245, 1)
@@ -10,8 +13,9 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur6gg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msjnk"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52pyj"]
 bg_color = Color(1, 1, 1, 1)
@@ -20,6 +24,10 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48vd4"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_u4cqy")
 
@@ -27,10 +35,10 @@ script = ExtResource("1_u4cqy")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 706.0
-offset_top = 276.0
-offset_right = -708.0
-offset_bottom = -418.0
+offset_left = 783.0
+offset_top = 311.0
+offset_right = -785.0
+offset_bottom = -453.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -55,9 +63,10 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_52pyj")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/hover = SubResource("StyleBoxFlat_i3got")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ur6gg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_msjnk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_52pyj")
 text = "Resume"
 
@@ -65,13 +74,27 @@ text = "Resume"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_52pyj")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/hover = SubResource("StyleBoxFlat_i3got")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ur6gg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48vd4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_52pyj")
 text = "Main Menu"
+
+[node name="HoverBtn" type="AudioStreamPlayer" parent="VBoxContainer"]
+stream = ExtResource("3_msjnk")
+volume_db = -30.0
+
+[node name="ClickBtn" type="AudioStreamPlayer" parent="VBoxContainer"]
+stream = ExtResource("4_48vd4")
+volume_db = -30.0
 
 [node name="224496Fe-6088-490c-95Bc-275Ae3200e5aRemovalaiPreview" type="Sprite2D" parent="."]
 position = Vector2(961, 400)
 scale = Vector2(0.371667, 0.325)
 texture = ExtResource("2_ur6gg")
+
+[connection signal="mouse_entered" from="VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

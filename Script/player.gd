@@ -18,6 +18,12 @@ const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
 @onready var jump_label: Label = get_tree().get_root().get_node("Game/UI Layer/label_jump")
 @onready var time_label: Label = get_tree().get_root().get_node("Game/UI Layer/timestamp")
 
+#suara
+@onready var jump_sound = $jump
+@onready var walk_sound = $walk
+@onready var crash_sound = $bump
+
+
 # State variables
 var jump_charge_time: float = 0.0
 var is_charging_jump: bool = false
@@ -54,6 +60,16 @@ func _physics_process(delta: float) -> void:
 		facing_direction = direction
 		sprite.flip_h = facing_direction < 0
 
+	# Suara langkah
+	var is_moving = direction != 0
+	if is_on_floor() and is_moving and not is_charging_jump:
+		if not walk_sound.playing:
+			walk_sound.pitch_scale = randf_range(0.95, 1.05)
+			walk_sound.play()
+	else:
+		if walk_sound.playing:
+			walk_sound.stop()
+
 	# Jump charge
 	if is_on_floor():
 		if Input.is_action_pressed("ui_accept"):
@@ -65,12 +81,14 @@ func _physics_process(delta: float) -> void:
 			var charge_ratio: float = jump_charge_time / CHARGE_TIME
 			velocity.y = lerp(MIN_JUMP_VELOCITY, MAX_JUMP_VELOCITY, charge_ratio)
 
+			# Mainkan suara lompat saat benar-benar loncat
+			jump_sound.play()
+
 			if direction == 0:
 				velocity.x = facing_direction * (JUMP_HORIZONTAL_FORCE * 1.5)
 			else:
 				velocity.x = direction * JUMP_HORIZONTAL_FORCE
 
-			# Hitung lompatan dan mulai timer
 			jump_count += 1
 			jump_label.text = "TOTAL JUMP: " + str(jump_count)
 
@@ -95,6 +113,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
 	# Timer jalan terus setelah lompat pertama
 	if has_started_timer:
 		time_since_first_jump += delta
@@ -111,11 +130,20 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		for i in range(get_slide_collision_count()):
 			var collision := get_slide_collision(i)
-			if collision != null:
+			if collision:
 				var normal = collision.get_normal()
+				
+				# Deteksi tabrakan horizontal kuat
 				if abs(normal.x) > 0.9:
 					velocity.x = normal.x * WALL_KNOCKBACK_FORCE
 					velocity.y *= 0.9
+					
+					# Mainkan suara jika tidak sedang diputar
+					if not crash_sound.playing:
+						crash_sound.pitch_scale = randf_range(0.9, 1.1)
+						crash_sound.play()
+
+
 
 	# Animasi
 	if not is_on_floor():

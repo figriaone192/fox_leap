@@ -16,9 +16,19 @@ func _ready():
 	settings_ui.hide()
 	settings_button.pressed.connect(show_settings)
 	back_button.pressed.connect(hide_settings)
+	
+	#main ulang musik
+	Music.play_menu_music()
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://Scene/game.tscn")
+	var transition = preload("res://transition.tscn").instantiate()
+	get_tree().root.add_child(transition)
+
+	transition.on_transition_finished.connect(func():
+		get_tree().change_scene_to_file("res://Scene/Game.tscn")
+	)
+	
+	transition.transition()
 
 func _on_settings_pressed():
 	print("Settings belum dibuat")

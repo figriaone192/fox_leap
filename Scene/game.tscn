@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dhoo1y5vuysix"]
+[gd_scene load_steps=37 format=4 uid="uid://dhoo1y5vuysix"]
 
 [ext_resource type="PackedScene" uid="uid://cmxm4s8c31qi6" path="res://Player & NPC/Player.tscn" id="1_mhtsl"]
 [ext_resource type="Script" uid="uid://bn3rl02ur37we" path="res://Scene/game.gd" id="1_sqb0o"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dk4cj36rs3tu6" path="res://Assets/Tiles/Floor 1/log.png" id="11_cvvdq"]
 [ext_resource type="Texture2D" uid="uid://c88ueowerdv1y" path="res://Assets/Tiles/Floor 3/back.png" id="11_vyw1f"]
 [ext_resource type="Texture2D" uid="uid://4kcc744etnnt" path="res://Assets/Tiles/Floor 3/props-sheet.png" id="11_yjs1f"]
+[ext_resource type="FontFile" uid="uid://u1vo6uxfqqis" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="19_5smqc"]
 [ext_resource type="PackedScene" uid="uid://l6cepqxapfr8" path="res://Scene/pause_menu.tscn" id="20_gji41"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mhtsl"]
@@ -1709,6 +1710,7 @@ offset_top = -37.48
 offset_right = 73.56
 offset_bottom = -10.48
 scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("19_5smqc")
 text = "TOTAL JUMP: 0"
 
 [node name="timestamp" type="Label" parent="UI Layer"]
@@ -1717,11 +1719,12 @@ anchor_left = 0.633
 anchor_top = 0.067
 anchor_right = 0.633
 anchor_bottom = 0.067
-offset_left = 26.64
-offset_top = -41.36
-offset_right = 138.64
-offset_bottom = -12.36
+offset_left = -33.36
+offset_top = -49.36
+offset_right = 112.64
+offset_bottom = -22.36
 scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("19_5smqc")
 text = "TIME : 00:00.0"
 
 [node name="GameManager" type="Node" parent="."]

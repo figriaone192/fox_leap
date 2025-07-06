@@ -1,11 +1,131 @@
-[gd_scene load_steps=13 format=3 uid="uid://ifjpihxui1uj"]
+[gd_scene load_steps=30 format=3 uid="uid://ifjpihxui1uj"]
 
 [ext_resource type="Script" uid="uid://oxh0pr8ar0nd" path="res://Script/main_menu.gd" id="1_ftydy"]
 [ext_resource type="Texture2D" uid="uid://56o3imu7t87g" path="res://Assets/Tiles/Floor 1/background.png" id="2_hii65"]
 [ext_resource type="Texture2D" uid="uid://8kgg78ao6j6n" path="res://Assets/Tiles/Floor 1/middleground.png" id="3_kqsxi"]
 [ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="4_kqsxi"]
-[ext_resource type="AudioStream" uid="uid://dyuu8g60x6rbx" path="res://Assets/Sound/hover_btn.wav" id="5_hptlk"]
-[ext_resource type="AudioStream" uid="uid://dnog4pdgtobyo" path="res://Assets/Sound/click_btn.wav" id="5_pvidh"]
+[ext_resource type="AudioStream" uid="uid://c24prwpabufi0" path="res://Assets/Sound/hover_btn.wav" id="5_hptlk"]
+[ext_resource type="AudioStream" uid="uid://dcc3xcaqtv5m7" path="res://Assets/Sound/click_btn.wav" id="5_pvidh"]
+[ext_resource type="FontFile" uid="uid://d0v825nww85qu" path="res://Assets/Font/PixeloidSans-mLxMm.ttf" id="6_ejkra"]
+[ext_resource type="FontFile" uid="uid://u1vo6uxfqqis" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="6_s2f1d"]
+[ext_resource type="Texture2D" uid="uid://bqh5e1audfqhs" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="8_s2f1d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5cjw"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(0, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clwji"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(33, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85dp7"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(66, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ostu5"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(99, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1hv4"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(66, 96, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liw1m"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(33, 96, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvxg0"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(33, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eeal"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(0, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mud5u"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(33, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvocf"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(66, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmp2f"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(99, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pik8"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(132, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adgam"]
+atlas = ExtResource("8_s2f1d")
+region = Rect2(165, 32, 33, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejkra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5cjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clwji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85dp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ostu5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1hv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liw1m")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvxg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvxg0")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eeal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mud5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvocf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmp2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pik8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adgam")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_hptlk"]
 length = 0.001
@@ -53,6 +173,8 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06t4h"]
 bg_color = Color(1, 1, 1, 1)
@@ -88,6 +210,13 @@ scale = Vector2(1.66333, 1.66333)
 texture = ExtResource("4_kqsxi")
 metadata/_edit_lock_ = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="224496Fe-6088-490c-95Bc-275Ae3200e5aRemovalaiPreview"]
+position = Vector2(189.379, -88.3769)
+scale = Vector2(4.21753, 3.6354)
+sprite_frames = SubResource("SpriteFrames_ejkra")
+animation = &"Idle"
+autoplay = "Idle"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="224496Fe-6088-490c-95Bc-275Ae3200e5aRemovalaiPreview"]
 libraries = {
 &"": SubResource("AnimationLibrary_oqads")
@@ -110,6 +239,15 @@ offset_top = -4.10679
 offset_right = 673.035
 offset_bottom = 24.8932
 
+[node name="Label" type="Label" parent="."]
+offset_left = 85.0
+offset_top = 950.0
+offset_right = 210.0
+offset_bottom = 974.0
+scale = Vector2(2.45061, 2.27505)
+theme_override_fonts/font = ExtResource("6_ejkra")
+text = "Prod. @devabal"
+
 [node name="MainMenu" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
@@ -119,9 +257,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -174.0
-offset_top = 125.0
+offset_top = 121.5
 offset_right = 205.0
-offset_bottom = 352.0
+offset_bottom = 399.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.015, 1.015)
@@ -135,6 +273,7 @@ volume_db = -30.0
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
@@ -145,16 +284,29 @@ text = "Play"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
 text = "Settings"
 
+[node name="CreditButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Credit"
+
 [node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
@@ -169,5 +321,7 @@ volume_db = -30.0
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/CreditButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/CreditButton" to="." method="_on_settings_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
