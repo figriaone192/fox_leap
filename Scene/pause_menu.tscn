@@ -34,7 +34,7 @@ offset_bottom = -418.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(0, 0.435294, 0, 0.701961)
+color = Color(0.218139, 0.0719368, 1.20327e-08, 0.701961)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8

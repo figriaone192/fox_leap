@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ifjpihxui1uj"]
+[gd_scene load_steps=13 format=3 uid="uid://ifjpihxui1uj"]
 
 [ext_resource type="Script" uid="uid://oxh0pr8ar0nd" path="res://Script/main_menu.gd" id="1_ftydy"]
 [ext_resource type="Texture2D" uid="uid://56o3imu7t87g" path="res://Assets/Tiles/Floor 1/background.png" id="2_hii65"]
 [ext_resource type="Texture2D" uid="uid://8kgg78ao6j6n" path="res://Assets/Tiles/Floor 1/middleground.png" id="3_kqsxi"]
 [ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="4_kqsxi"]
+[ext_resource type="AudioStream" uid="uid://dyuu8g60x6rbx" path="res://Assets/Sound/hover_btn.wav" id="5_hptlk"]
+[ext_resource type="AudioStream" uid="uid://dnog4pdgtobyo" path="res://Assets/Sound/click_btn.wav" id="5_pvidh"]
 
 [sub_resource type="Animation" id="Animation_hptlk"]
 length = 0.001
@@ -125,6 +127,10 @@ grow_vertical = 2
 scale = Vector2(1.015, 1.015)
 theme_override_constants/separation = 10
 
+[node name="HoverBtn" type="AudioStreamPlayer" parent="MainMenu/VBoxContainer"]
+stream = ExtResource("5_pvidh")
+volume_db = -30.0
+
 [node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -154,3 +160,14 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
 text = "Quit"
+
+[node name="ClickBtn" type="AudioStreamPlayer" parent="MainMenu/VBoxContainer"]
+stream = ExtResource("5_hptlk")
+volume_db = -30.0
+
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

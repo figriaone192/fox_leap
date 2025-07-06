@@ -5,6 +5,7 @@ extends Control
 @onready var settings_button = $MainMenu/VBoxContainer/SettingsButton
 @onready var back_button = $Setting/HSlider/Button
 
+
 func _ready():
 	# Tombol Main Menu
 	$MainMenu/VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
@@ -33,3 +34,21 @@ func show_settings():
 func hide_settings():
 	settings_ui.hide()
 	menu_ui.show()
+
+func _on_play_button_mouse_entered():
+	$MainMenu/VBoxContainer/HoverBtn.play()
+
+func _on_settings_button_mouse_entered():
+	$MainMenu/VBoxContainer/HoverBtn.play()
+
+func _on_quit_button_mouse_entered():
+	$MainMenu/VBoxContainer/HoverBtn.play()
+
+func _on_play_button_pressed():
+	$MainMenu/VBoxContainer/ClickBtn.play()
+
+func _on_settings_button_pressed():
+	$MainMenu/VBoxContainer/ClickBtn.play()
+
+func _on_quit_button_pressed():
+	$MainMenu/VBoxContainer/ClickBtn.play()

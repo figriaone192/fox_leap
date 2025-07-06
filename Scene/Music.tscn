@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu4ls3vka85mw"]
+
+[ext_resource type="AudioStream" uid="uid://bk2q4mxtxe2ml" path="res://Assets/Sound/sadforest.mp3" id="1_ewu0x"]
+
+[node name="MusicManager" type="Node2D"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ewu0x")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
