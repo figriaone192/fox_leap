@@ -21,7 +21,7 @@ func _ready():
 	Music.play_menu_music()
 
 func _on_play_pressed():
-	var transition = preload("res://transition.tscn").instantiate()
+	var transition = preload("res://Scene/transition.tscn").instantiate()
 	get_tree().root.add_child(transition)
 
 	transition.on_transition_finished.connect(func():

@@ -133,15 +133,14 @@ func _physics_process(delta: float) -> void:
 			if collision:
 				var normal = collision.get_normal()
 				
-				# Deteksi tabrakan horizontal kuat
 				if abs(normal.x) > 0.9:
 					velocity.x = normal.x * WALL_KNOCKBACK_FORCE
 					velocity.y *= 0.9
-					
-					# Mainkan suara jika tidak sedang diputar
-					if not crash_sound.playing:
-						crash_sound.pitch_scale = randf_range(0.9, 1.1)
-						crash_sound.play()
+
+					# Putar ulang suara meskipun masih playing
+					crash_sound.stop()
+					crash_sound.pitch_scale = randf_range(0.95, 1.05)
+					crash_sound.play()
 
 
 

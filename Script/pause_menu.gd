@@ -22,7 +22,7 @@ func _on_resume_pressed():
 
 func _on_main_menu_pressed():
 	get_tree().paused = false
-	var transition = preload("res://transition.tscn").instantiate()
+	var transition = preload("res://Scene/transition.tscn").instantiate()
 	get_tree().root.add_child(transition)
 
 	transition.on_transition_finished.connect(func():
