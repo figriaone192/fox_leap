@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://l6cepqxapfr8"]
 
 [ext_resource type="Script" uid="uid://bvlg5drbmcmfy" path="res://Script/pause_menu.gd" id="1_u4cqy"]
-[ext_resource type="FontFile" uid="uid://u1vo6uxfqqis" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="2_52pyj"]
-[ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="2_ur6gg"]
-[ext_resource type="AudioStream" uid="uid://dcc3xcaqtv5m7" path="res://Assets/Sound/click_btn.wav" id="3_msjnk"]
-[ext_resource type="AudioStream" uid="uid://c24prwpabufi0" path="res://Assets/Sound/hover_btn.wav" id="4_48vd4"]
+[ext_resource type="FontFile" uid="uid://ijd4mmq1g0ag" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="2_52pyj"]
+[ext_resource type="Texture2D" uid="uid://p7gfegvvekxh" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="2_ur6gg"]
+[ext_resource type="AudioStream" uid="uid://c2thgrr2mpedv" path="res://Assets/Sound/click_btn.wav" id="3_msjnk"]
+[ext_resource type="AudioStream" uid="uid://bivjxk4vlqm8k" path="res://Assets/Sound/hover_btn.wav" id="4_48vd4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3got"]
 bg_color = Color(0.169245, 0.169245, 0.169245, 1)

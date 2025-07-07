@@ -7,6 +7,7 @@ const MIN_JUMP_VELOCITY: float = -150.0
 const CHARGE_TIME: float = 1.0
 const JUMP_HORIZONTAL_FORCE: float = 250.0
 const WALL_KNOCKBACK_FORCE: float = 200.0
+const SAVE_PATH := "user://save_position.dat"
 
 # Camera grid control
 const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
@@ -14,15 +15,14 @@ const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 
-# UI labels (ganti path jika perlu)
+# UI labels
 @onready var jump_label: Label = get_tree().get_root().get_node("Game/UI Layer/label_jump")
 @onready var time_label: Label = get_tree().get_root().get_node("Game/UI Layer/timestamp")
 
-#suara
+# Sounds
 @onready var jump_sound = $jump
 @onready var walk_sound = $walk
 @onready var crash_sound = $bump
-
 
 # State variables
 var jump_charge_time: float = 0.0
@@ -32,14 +32,22 @@ var facing_direction: int = 1
 var jump_count: int = 0
 var has_started_timer: bool = false
 var time_since_first_jump: float = 0.0
+var was_on_floor: bool = false
 
-# Kamera ruangan
+# Camera logic
 var current_room: Vector2 = Vector2.ZERO
 var target_camera_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	camera.make_current()
 	_update_camera_room(true)
+
+	# Load posisi player jika file save tersedia
+	if FileAccess.file_exists(SAVE_PATH):
+		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+		global_position = file.get_var()
+		file.close()
+
 	jump_label.text = "TOTAL JUMP: 0"
 	time_label.text = "TIME: 00:00.0"
 
@@ -55,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("move_right"):
 		direction += 1
 
-	# Flip sprite arah hadap
+	# Flip sprite
 	if direction != 0:
 		facing_direction = direction
 		sprite.flip_h = facing_direction < 0
@@ -81,19 +89,20 @@ func _physics_process(delta: float) -> void:
 			var charge_ratio: float = jump_charge_time / CHARGE_TIME
 			velocity.y = lerp(MIN_JUMP_VELOCITY, MAX_JUMP_VELOCITY, charge_ratio)
 
-			# Mainkan suara lompat saat benar-benar loncat
-			jump_sound.play()
-
 			if direction == 0:
 				velocity.x = facing_direction * (JUMP_HORIZONTAL_FORCE * 1.5)
 			else:
 				velocity.x = direction * JUMP_HORIZONTAL_FORCE
 
+			# Tambah lompatan & timer
 			jump_count += 1
 			jump_label.text = "TOTAL JUMP: " + str(jump_count)
 
 			if not has_started_timer:
 				has_started_timer = true
+
+			# Suara lompat
+			jump_sound.play()
 
 			jump_charge_time = 0.0
 			is_charging_jump = false
@@ -104,7 +113,7 @@ func _physics_process(delta: float) -> void:
 		jump_charge_time = 0.0
 		is_charging_jump = false
 
-	# Gerak horizontal saat di tanah
+	# Gerak horizontal di tanah
 	if is_on_floor() and not is_charging_jump:
 		if direction != 0:
 			velocity.x = direction * SPEED
@@ -113,36 +122,32 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-	# Timer jalan terus setelah lompat pertama
+	# Timer
 	if has_started_timer:
 		time_since_first_jump += delta
-
-		# Format waktu MM:SS.ss
 		var minutes = int(time_since_first_jump) / 60
 		var seconds = int(time_since_first_jump) % 60
 		var centiseconds = int((time_since_first_jump - int(time_since_first_jump)) * 100)
-
 		time_label.text = "TIME: %02d:%02d.%02d" % [minutes, seconds, centiseconds]
 
-		
-	# Knockback saat tabrak dinding
+	# Knockback
 	if not is_on_floor():
 		for i in range(get_slide_collision_count()):
 			var collision := get_slide_collision(i)
 			if collision:
 				var normal = collision.get_normal()
-				
 				if abs(normal.x) > 0.9:
 					velocity.x = normal.x * WALL_KNOCKBACK_FORCE
 					velocity.y *= 0.9
-
-					# Putar ulang suara meskipun masih playing
+					# Suara crash
 					crash_sound.stop()
 					crash_sound.pitch_scale = randf_range(0.95, 1.05)
 					crash_sound.play()
 
-
+	# Autosave saat mendarat
+	if is_on_floor() and not was_on_floor:
+		save_position()
+	was_on_floor = is_on_floor()
 
 	# Animasi
 	if not is_on_floor():
@@ -171,3 +176,9 @@ func _update_camera_room(force: bool = false) -> void:
 
 func _move_camera() -> void:
 	camera.global_position = target_camera_pos
+
+func save_position():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	file.store_var(global_position)
+	file.close()
+	print("Auto-saved at:", global_position)
