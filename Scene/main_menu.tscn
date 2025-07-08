@@ -261,9 +261,9 @@ bus_name = "SFX"
 
 [node name="Back" type="Button" parent="Setting"]
 offset_left = 863.0
-offset_top = 863.0
+offset_top = 934.0
 offset_right = 1130.0
-offset_bottom = 925.0
+offset_bottom = 996.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_s2f1d")
@@ -299,6 +299,25 @@ offset_bottom = 650.0
 scale = Vector2(2.45061, 2.27505)
 theme_override_fonts/font = ExtResource("6_ejkra")
 text = "Master Volume"
+
+[node name="ResetButton" type="Button" parent="Setting"]
+offset_left = 715.0
+offset_top = 834.0
+offset_right = 1306.0
+offset_bottom = 902.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Reset Game Data"
+
+[node name="ResetConfirmDialog" type="ConfirmationDialog" parent="Setting"]
+title = "Reset Data?"
+initial_position = 1
+size = Vector2i(330, 80)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -383,6 +402,8 @@ bus = &"SFX"
 
 [connection signal="mouse_entered" from="Setting/Back" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="Setting/Back" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="Setting/ResetButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="pressed" from="Setting/ResetButton" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_mouse_entered"]

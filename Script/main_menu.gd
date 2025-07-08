@@ -1,5 +1,9 @@
 extends Control
 
+const SAVE_PATH := "user://save_data.save"
+
+@onready var reset_button: Button = $Setting/ResetButton
+@onready var confirm_dialog: ConfirmationDialog = $Setting/ResetConfirmDialog
 @onready var menu_ui = $MainMenu
 @onready var settings_ui = $Setting
 @onready var settings_button = $MainMenu/VBoxContainer/SettingsButton
@@ -8,8 +12,8 @@ extends Control
 @onready var slider2 = $Setting/HSlider2
 
 func _ready():
-	
-	
+	reset_button.pressed.connect(_on_reset_pressed)
+	confirm_dialog.confirmed.connect(_do_reset)
 	# Tombol Main Menu
 	$MainMenu/VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
 	$MainMenu/VBoxContainer/SettingsButton.pressed.connect(_on_settings_pressed)
@@ -22,6 +26,16 @@ func _ready():
 	
 	#main ulang musik
 	Music.play_menu_music()
+
+func _on_reset_pressed():
+	confirm_dialog.popup_centered()
+
+func _do_reset():
+	if FileAccess.file_exists(SAVE_PATH):
+		DirAccess.remove_absolute(SAVE_PATH)
+		print("Data save berhasil direset.")
+	else:
+		print("Tidak ada file save yang ditemukan.")
 
 func _on_play_pressed():
 	var transition = preload("res://Scene/transition.tscn").instantiate()
