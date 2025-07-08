@@ -1,10 +1,10 @@
 [gd_scene load_steps=22 format=3 uid="uid://cmxm4s8c31qi6"]
 
 [ext_resource type="Script" uid="uid://dp1k7q4tubrqj" path="res://Script/player.gd" id="1_3eeal"]
-[ext_resource type="Texture2D" uid="uid://xkodna8j6tyy" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="1_p4wyn"]
-[ext_resource type="AudioStream" uid="uid://1xs8sed06nm0" path="res://Assets/Sound/Player/jump.mp3" id="3_wkl1f"]
-[ext_resource type="AudioStream" uid="uid://bdo537xdpmhlk" path="res://Assets/Sound/Player/stepdirt_3.wav" id="4_wkl1f"]
-[ext_resource type="AudioStream" uid="uid://bw03kii03cedk" path="res://Assets/Sound/Player/crash.mp3" id="5_go35m"]
+[ext_resource type="Texture2D" uid="uid://bqh5e1audfqhs" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="1_p4wyn"]
+[ext_resource type="AudioStream" uid="uid://b5utm7wirvenb" path="res://Assets/Sound/Player/jump.mp3" id="3_wkl1f"]
+[ext_resource type="AudioStream" uid="uid://cryrv71lghlsx" path="res://Assets/Sound/Player/stepdirt_3.wav" id="4_wkl1f"]
+[ext_resource type="AudioStream" uid="uid://bg2cqajg44b2r" path="res://Assets/Sound/Player/crash.mp3" id="5_go35m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5cjw"]
 atlas = ExtResource("1_p4wyn")
@@ -150,12 +150,15 @@ shape = SubResource("CircleShape2D_6saqk")
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_wkl1f")
-volume_db = -21.694
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="walk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wkl1f")
-volume_db = -30.0
+volume_db = -17.0
+bus = &"SFX"
 
 [node name="bump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_go35m")
-volume_db = -18.728
+volume_db = -5.0
+bus = &"SFX"

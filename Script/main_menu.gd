@@ -3,10 +3,13 @@ extends Control
 @onready var menu_ui = $MainMenu
 @onready var settings_ui = $Setting
 @onready var settings_button = $MainMenu/VBoxContainer/SettingsButton
-@onready var back_button = $Setting/HSlider/Button
-
+@onready var back_button = $Setting/Back
+@onready var slider = $Setting/HSlider1
+@onready var slider2 = $Setting/HSlider2
 
 func _ready():
+	
+	
 	# Tombol Main Menu
 	$MainMenu/VBoxContainer/PlayButton.pressed.connect(_on_play_pressed)
 	$MainMenu/VBoxContainer/SettingsButton.pressed.connect(_on_settings_pressed)

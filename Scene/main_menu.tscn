@@ -1,14 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://ifjpihxui1uj"]
+[gd_scene load_steps=31 format=3 uid="uid://ifjpihxui1uj"]
 
 [ext_resource type="Script" uid="uid://oxh0pr8ar0nd" path="res://Script/main_menu.gd" id="1_ftydy"]
-[ext_resource type="Texture2D" uid="uid://ronewvrq3p0b" path="res://Assets/Tiles/Floor 1/background.png" id="2_hii65"]
-[ext_resource type="Texture2D" uid="uid://dfi874n275xt6" path="res://Assets/Tiles/Floor 1/middleground.png" id="3_kqsxi"]
-[ext_resource type="Texture2D" uid="uid://p7gfegvvekxh" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="4_kqsxi"]
-[ext_resource type="AudioStream" uid="uid://bivjxk4vlqm8k" path="res://Assets/Sound/hover_btn.wav" id="5_hptlk"]
-[ext_resource type="AudioStream" uid="uid://c2thgrr2mpedv" path="res://Assets/Sound/click_btn.wav" id="5_pvidh"]
-[ext_resource type="FontFile" uid="uid://cocybmyyv0tro" path="res://Assets/Font/PixeloidSans-mLxMm.ttf" id="6_ejkra"]
-[ext_resource type="FontFile" uid="uid://ijd4mmq1g0ag" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="6_s2f1d"]
-[ext_resource type="Texture2D" uid="uid://xkodna8j6tyy" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="8_s2f1d"]
+[ext_resource type="Texture2D" uid="uid://56o3imu7t87g" path="res://Assets/Tiles/Floor 1/background.png" id="2_hii65"]
+[ext_resource type="Texture2D" uid="uid://8kgg78ao6j6n" path="res://Assets/Tiles/Floor 1/middleground.png" id="3_kqsxi"]
+[ext_resource type="Texture2D" uid="uid://eut2sybcb4p0" path="res://Scene/224496fe-6088-490c-95bc-275ae3200e5a_removalai_preview.png" id="4_kqsxi"]
+[ext_resource type="AudioStream" uid="uid://c24prwpabufi0" path="res://Assets/Sound/hover_btn.wav" id="5_hptlk"]
+[ext_resource type="AudioStream" uid="uid://dcc3xcaqtv5m7" path="res://Assets/Sound/click_btn.wav" id="5_pvidh"]
+[ext_resource type="FontFile" uid="uid://d0v825nww85qu" path="res://Assets/Font/PixeloidSans-mLxMm.ttf" id="6_ejkra"]
+[ext_resource type="FontFile" uid="uid://u1vo6uxfqqis" path="res://Assets/Font/PixeloidSansBold-PKnYd.ttf" id="6_s2f1d"]
+[ext_resource type="Script" uid="uid://dv3axva0fon3q" path="res://Script/h_slider_1.gd" id="6_yok32"]
+[ext_resource type="Texture2D" uid="uid://bqh5e1audfqhs" path="res://Assets/Tiles/Floor 1/Spritesheet.png" id="8_s2f1d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5cjw"]
 atlas = ExtResource("8_s2f1d")
@@ -225,26 +226,86 @@ autoplay = "judul_ani"
 
 [node name="Setting" type="CanvasLayer" parent="."]
 
-[node name="HSlider" type="HSlider" parent="Setting"]
-offset_left = 515.0
-offset_top = 736.0
-offset_right = 1120.0
-offset_bottom = 761.0
-scale = Vector2(1.585, 2.435)
+[node name="HSlider1" type="HSlider" parent="Setting"]
+offset_left = 835.0
+offset_top = 699.0
+offset_right = 1343.0
+offset_bottom = 724.0
+scale = Vector2(1.305, 1.955)
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_yok32")
+bus_name = "Music"
 
-[node name="Button" type="Button" parent="Setting/HSlider"]
-layout_mode = 0
-offset_left = 617.035
-offset_top = -4.10679
-offset_right = 673.035
-offset_bottom = 24.8932
+[node name="HSlider2" type="HSlider" parent="Setting"]
+offset_left = 835.0
+offset_top = 628.0
+offset_right = 1343.0
+offset_bottom = 653.0
+scale = Vector2(1.305, 1.955)
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_yok32")
+bus_name = "Master"
+
+[node name="HSlider3" type="HSlider" parent="Setting"]
+offset_left = 835.0
+offset_top = 765.0
+offset_right = 1343.0
+offset_bottom = 790.0
+scale = Vector2(1.305, 1.955)
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_yok32")
+bus_name = "SFX"
+
+[node name="Back" type="Button" parent="Setting"]
+offset_left = 863.0
+offset_top = 863.0
+offset_right = 1130.0
+offset_bottom = 925.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_s2f1d")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06t4h")
+text = "Back"
+
+[node name="Label1" type="Label" parent="Setting"]
+offset_left = 518.0
+offset_top = 694.0
+offset_right = 643.0
+offset_bottom = 718.0
+scale = Vector2(2.45061, 2.27505)
+theme_override_fonts/font = ExtResource("6_ejkra")
+text = "Music Volume"
+
+[node name="Label2" type="Label" parent="Setting"]
+offset_left = 447.0
+offset_top = 763.0
+offset_right = 593.0
+offset_bottom = 787.0
+scale = Vector2(2.45061, 2.27505)
+theme_override_fonts/font = ExtResource("6_ejkra")
+text = "Sound FX Volume"
+
+[node name="Label3" type="Label" parent="Setting"]
+offset_left = 487.0
+offset_top = 626.0
+offset_right = 615.0
+offset_bottom = 650.0
+scale = Vector2(2.45061, 2.27505)
+theme_override_fonts/font = ExtResource("6_ejkra")
+text = "Master Volume"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 85.0
-offset_top = 950.0
-offset_right = 210.0
-offset_bottom = 974.0
+offset_left = 80.0
+offset_top = 945.0
+offset_right = 208.0
+offset_bottom = 969.0
 scale = Vector2(2.45061, 2.27505)
 theme_override_fonts/font = ExtResource("6_ejkra")
 text = "Prod. @devabal"
@@ -268,7 +329,8 @@ theme_override_constants/separation = 10
 
 [node name="HoverBtn" type="AudioStreamPlayer" parent="MainMenu/VBoxContainer"]
 stream = ExtResource("5_pvidh")
-volume_db = -30.0
+volume_db = -20.0
+bus = &"SFX"
 
 [node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
@@ -316,8 +378,11 @@ text = "Quit"
 
 [node name="ClickBtn" type="AudioStreamPlayer" parent="MainMenu/VBoxContainer"]
 stream = ExtResource("5_hptlk")
-volume_db = -30.0
+volume_db = -20.0
+bus = &"SFX"
 
+[connection signal="mouse_entered" from="Setting/Back" to="." method="_on_play_button_mouse_entered"]
+[connection signal="pressed" from="Setting/Back" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_mouse_entered"]

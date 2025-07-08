@@ -7,7 +7,8 @@ const MIN_JUMP_VELOCITY: float = -150.0
 const CHARGE_TIME: float = 1.0
 const JUMP_HORIZONTAL_FORCE: float = 250.0
 const WALL_KNOCKBACK_FORCE: float = 200.0
-const SAVE_PATH := "user://save_position.dat"
+const SAVE_PATH := "user://save_data.save"
+
 
 # Camera grid control
 const ROOM_SIZE: Vector2 = Vector2(1920, 1080)
@@ -45,11 +46,25 @@ func _ready() -> void:
 	# Load posisi player jika file save tersedia
 	if FileAccess.file_exists(SAVE_PATH):
 		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-		global_position = file.get_var()
+		var data = file.get_var()
 		file.close()
 
-	jump_label.text = "TOTAL JUMP: 0"
-	time_label.text = "TIME: 00:00.0"
+		if typeof(data) == TYPE_DICTIONARY:
+			global_position = data.get("position", global_position)
+			jump_count = data.get("jump_count", 0)
+			time_since_first_jump = data.get("time", 0.0)
+			has_started_timer = true  # langsung mulai timer setelah load
+
+		print("Loaded save:", data)
+
+
+	jump_label.text = "TOTAL JUMP: " + str(jump_count)
+	time_label.text = "TIME: %02d:%02d.%02d" % [
+		int(time_since_first_jump) / 60,
+		int(time_since_first_jump) % 60,
+		int((time_since_first_jump - int(time_since_first_jump)) * 100)
+	]
+
 
 func _physics_process(delta: float) -> void:
 	# Tambah gravitasi
@@ -179,6 +194,11 @@ func _move_camera() -> void:
 
 func save_position():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	file.store_var(global_position)
+	var data = {
+		"position": global_position,
+		"jump_count": jump_count,
+		"time": time_since_first_jump
+	}
+	file.store_var(data)
 	file.close()
-	print("Auto-saved at:", global_position)
+	print("Auto-saved at:", global_position, "jumps:", jump_count, "time:", time_since_first_jump)

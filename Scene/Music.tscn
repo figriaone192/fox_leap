@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu4ls3vka85mw"]
 
 [ext_resource type="Script" uid="uid://c8vih1n1b1ivs" path="res://Script/music.gd" id="1_7oapy"]
-[ext_resource type="AudioStream" uid="uid://btm5hu5mtdkr4" path="res://Assets/Sound/sadforest.mp3" id="1_ewu0x"]
+[ext_resource type="AudioStream" uid="uid://c7qvfl6fa5i0h" path="res://Assets/Sound/sadforest.mp3" id="1_ewu0x"]
 
 [node name="MusicManager" type="Node2D"]
 script = ExtResource("1_7oapy")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ewu0x")
-volume_db = -10.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
