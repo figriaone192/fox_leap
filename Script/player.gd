@@ -205,6 +205,7 @@ func save_position():
 
 func _on_detection_area_area_entered(area: Area2D) -> void:
 	if area.name == "Fish":
+		save_win_data()
 		get_tree().paused = false
 		var transition = preload("res://Scene/transition.tscn").instantiate()
 		get_tree().root.add_child(transition)
@@ -213,3 +214,12 @@ func _on_detection_area_area_entered(area: Area2D) -> void:
 			get_tree().change_scene_to_file("res://Scene/win.tscn")
 		)	
 		transition.transition()
+		
+func save_win_data():
+	var file = FileAccess.open("user://win_data.save", FileAccess.WRITE)
+	var data = {
+		"time": time_since_first_jump,
+		"jump_count": jump_count
+	}
+	file.store_var(data)
+	file.close()
