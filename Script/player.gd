@@ -202,3 +202,14 @@ func save_position():
 	file.store_var(data)
 	file.close()
 	print("Auto-saved at:", global_position, "jumps:", jump_count, "time:", time_since_first_jump)
+
+func _on_detection_area_area_entered(area: Area2D) -> void:
+	if area.name == "Fish":
+		get_tree().paused = false
+		var transition = preload("res://Scene/transition.tscn").instantiate()
+		get_tree().root.add_child(transition)
+
+		transition.on_transition_finished.connect(func():
+			get_tree().change_scene_to_file("res://Scene/win.tscn")
+		)	
+		transition.transition()

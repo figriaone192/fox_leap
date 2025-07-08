@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://v67l2h4cvppk"]
+
+[ext_resource type="Texture2D" uid="uid://dc31w3cfibbm0" path="res://Player & NPC/fish.png" id="1_mi6gr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ii2ng"]
+
+[node name="Fish" type="Area2D"]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-11.1875, -6.625)
+scale = Vector2(0.0569792, 0.0673784)
+texture = ExtResource("1_mi6gr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12, -4)
+scale = Vector2(3.29, 3.29)
+shape = SubResource("CircleShape2D_ii2ng")
